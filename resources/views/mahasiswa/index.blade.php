@@ -42,20 +42,46 @@
                                 <td>{{ $mahasiswa->no_telp }}</td>
                                 <td>
                                     <a href="{{ route('mahasiswa.edit', $mahasiswa->id) }}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#viewModal{{ $mahasiswa->id }}">
+                                        <i class="fas fa-eye"></i> Lihat
+                                    </button>
                                     <form action="{{ route('mahasiswa.delete', $mahasiswa->id) }}" method="POST" style="display: inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">
                                             <i class="fas fa-trash"></i> Hapus
                                         </button>
-                                        
                                     </form>
                                 </td>
                             </tr>
+    
+                            <!-- Modal Pop-up -->
+                            <div class="modal fade" id="viewModal{{ $mahasiswa->id }}" tabindex="-1" role="dialog" aria-labelledby="viewModalLabel{{ $mahasiswa->id }}" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="viewModalLabel{{ $mahasiswa->id }}">Detail Mahasiswa</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p><strong>Nama:</strong> {{ $mahasiswa->nama }}</p>
+                                            <p><strong>Email:</strong> {{ $mahasiswa->email }}</p>
+                                            <p><strong>Alamat:</strong> {{ $mahasiswa->alamat }}</p>
+                                            <p><strong>No HP:</strong> {{ $mahasiswa->no_telp }}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+    
 @endsection
